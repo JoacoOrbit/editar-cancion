@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.joaco_orbit.canciones.servicios.ServicioCanciones;
 
@@ -24,6 +25,10 @@ public class ControladorCanciones {
         this.servicioCanciones = servicioCanciones;
     }
 
+    @GetMapping("/")
+    public String incio(){
+        return "redirect:/canciones";
+    }
     @GetMapping("/canciones")
     public String desplegarCanciones(Model model){
         model.addAttribute("listaCanciones", servicioCanciones.obtenerTodasLasCanciones());
@@ -47,6 +52,24 @@ public class ControladorCanciones {
         } else {
             this.servicioCanciones.agregarCancion(nuevaCancion);
             return "redirect:/canciones";
+        }
+    }
+
+    @GetMapping("/canciones/formulario/editar/{idCancion}")
+    public String formularioEditarCancion(@PathVariable Long idCancion, Model model){
+        Cancion cancion = this.servicioCanciones.obtenerCancionPorId(idCancion);
+        model.addAttribute("cancion", cancion);
+        return "editarCancion";
+    }
+
+    @PutMapping("/canciones/procesa/editar/{idCancion}")
+    public String procesaEditarCancion(@Valid @ModelAttribute("cancion") Cancion cancion, BindingResult validaciones, @PathVariable Long idCancion){
+        if (validaciones.hasErrors()) {
+            return "editarCancion";
+        } else {
+            cancion.setId(idCancion);
+            servicioCanciones.agregarCancion(cancion);
+            return "redirect:/canciones/detalle/" + idCancion;
         }
     }
 }

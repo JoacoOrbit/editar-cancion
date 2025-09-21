@@ -10,10 +10,15 @@
 </head>
 <body>
     <h1>${cancion.titulo}</h1>
-    <h2>Artista: ${cancion.artista}</h2>
-    <h2>Álbum: ${cancion.album}</h2>
-    <h2>Género: ${cancion.genero}</h2>
-    <h2>Idioma: ${cancion.idioma}</h2>
+    <p>Artista: ${cancion.artista}</p>
+    <p>Álbum: ${cancion.album}</p>
+    <p>Género: ${cancion.genero}</p>
+    <p>Idioma: ${cancion.idioma}</p>
+    <form method="GET" action="/canciones/formulario/editar/${idCancion}">
+        <button>
+            Editar cancion
+        </button>
+    </form>
     <a href="/canciones">volver</a>
 </body>
 </html>

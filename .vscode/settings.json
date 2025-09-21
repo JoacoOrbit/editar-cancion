@@ -12,7 +12,7 @@
             "driver": "MySQL",
             "database": "canciones_bd",
             "username": "spring",
-            "name": "cancioness"
+            "name": "cancionesss"
         }
     ]
 }
