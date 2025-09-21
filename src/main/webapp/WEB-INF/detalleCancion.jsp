@@ -14,7 +14,7 @@
     <p>Álbum: ${cancion.album}</p>
     <p>Género: ${cancion.genero}</p>
     <p>Idioma: ${cancion.idioma}</p>
-    <form method="GET" action="/canciones/formulario/editar/${idCancion}">
+    <form method="GET" action="/canciones/formulario/editar/${cancion.id}">
         <button>
             Editar cancion
         </button>
